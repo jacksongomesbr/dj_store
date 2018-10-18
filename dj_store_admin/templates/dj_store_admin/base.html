@@ -1,0 +1,56 @@
+{% load bootstrap4 %}
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% bootstrap_css %}
+  {% block extra_head %}
+  {% endblock extra_head %}
+
+  <title>{% block title %}{% endblock title %} | DJ Store</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">DJS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          {% url 'dj_store_admin:categoriadeproduto_list' as categorias_url %}
+          <li class="nav-item {% if categorias_url in request.path %}active{% endif %}">
+            <a class="nav-link" href="{{ categorias_url }}">Categorias</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block contents %}
+    {% endblock contents %}
+  </div>
+
+  <footer>
+    <div class="container">
+      <p class="small text-muted">dj_store &copy; 2018 &dash; Loja de produtos</p>
+    </div>
+  </footer>
+
+  {% bootstrap_javascript jquery='full' %}
+  {% block document_loaded %}
+  {% endblock document_loaded %}
+</body>
+
+</html>

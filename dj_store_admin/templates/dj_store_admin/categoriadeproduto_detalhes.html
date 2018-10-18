@@ -1,0 +1,11 @@
+{% extends "dj_store_admin/base.html" %}
+{% block title %}Detalhes da categoria {{categoria.nome}}{% endblock title %}
+{% block contents %}
+<h1>{{ categoria.nome }}</h1>
+<h2>Produtos</h2>
+<ul>
+    {% for produto in categoria.produtos.all %}
+    <li><a href="{% url 'dj_store_admin:produto_detalhes' produto.id %}">{{ produto.nome }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock contents %}
