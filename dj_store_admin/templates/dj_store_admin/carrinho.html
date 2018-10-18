@@ -1,4 +1,38 @@
 {% extends "dj_store_admin/base.html" %}
+{% block title %}Carrinho{% endblock title %}
 {% block contents %}
-{{ carrinho }}
+<h1>Carrinho de compras</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Produto</th>
+            <th scope="col">Preço unitário (R$)</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Remover</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for produto_id, item in carrinho.items %}
+        <tr>
+            <td><a href="{% url 'dj_store_admin:produto_detalhes' produto_id %}">{{ item.nome }}</a></td>
+            <td>{{ item.preco_unitario }}</td>
+            <td>{{ item.quantidade }}</td>
+            <td>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="acao" value="excluir">
+                    <input type="hidden" name="produto_id" value="{{produto_id}}">
+                    <button class="btn btn-warning">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">Preço total</td>
+            <td colspan="2">R$ {{ preco_total }}</td>
+        </tr>
+    </tfoot>
+</table>
 {% endblock contents %}

@@ -7,6 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   {% bootstrap_css %}
+  <style type="text/css">
+    #contents {
+      margin-top: 20px;
+    }
+  </style>
   {% block extra_head %}
   {% endblock extra_head %}
 
@@ -31,13 +36,16 @@
           <li class="nav-item {% if categorias_url in request.path %}active{% endif %}">
             <a class="nav-link" href="{{ categorias_url }}">Categorias</a>
           </li>
-
+          {% url 'dj_store_admin:carrinho_detalhes' as carrinho_url %}
+          <li class="nav-item {% if carrinho_url in request.path %}active{% endif %}">
+            <a class="nav-link" href="{{ carrinho_url }}">Carrinho de compras</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container">
+  <div id="contents" class="container">
     {% block contents %}
     {% endblock contents %}
   </div>
